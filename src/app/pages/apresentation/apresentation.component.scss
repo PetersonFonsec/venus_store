@@ -1,0 +1,142 @@
+@use "../../shared/scss/variables/breakpoints";
+
+#apresentation {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction:column;
+
+  &_container {
+    max-width: 400px;
+    padding: var(--container-padding);
+    margin: 0 auto;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    padding-top: 114px;
+
+    @media (min-width: breakpoints.$tablet) {
+      max-width: 600px;
+
+    }
+  }
+
+  &_title {
+    font-size: 38px;
+    font-weight: var(--font-weight-normal);
+    color: var(--primary-color);
+    width: 234px;
+    max-width: 100%;
+    line-height: 52px;
+
+    b {
+      display: block;
+      font-weight: var(--font-weight-bold);
+      font-size: 40px;
+    }
+  }
+
+  &_background {
+    position: absolute;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    margin: 0 auto;
+
+    @media (min-width: breakpoints.$tablet) {
+      width: var(--container-max-width);
+      left: 0;
+      right: 0;
+    }
+
+    &_logo {
+      transform: rotate(-40deg);
+      position: absolute;
+      bottom: 174px;
+      right: -170px;
+      animation: logo 30s infinite ease-in-out;
+
+      @media (min-width: breakpoints.$tablet) {
+        right: 0px;
+      }
+    }
+
+    &_flower_1 {
+      position: absolute;
+      top: 24px;
+      right: 4px;
+      animation: flowers 8s infinite  linear;
+    }
+
+    &_flower_2 {
+      position: absolute;
+      bottom: 158px;
+      left: -4px;
+      animation: flowers 4s reverse ease-in-out infinite;
+    }
+
+    &_flower_3 {
+      position: absolute;
+      bottom: 408px;
+      left: 141px;
+      transform: scaleX(-1);
+    }
+  }
+
+  &_footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+
+@keyframes logo {
+  0% {
+    transform: rotate(-40deg);
+    scale: 1;
+  }
+  50% {
+    transform: rotate(-65deg);
+    scale: 0.9;
+  }
+  100% {
+    transform: rotate(-40deg);
+    scale: 1;
+  }
+}
+
+@keyframes flowers {
+  0% {
+    transform: translate(0, 0);
+    scale: 1;
+  }
+
+  25% {
+    transform: translate(-4px, -2px);
+    scale: 0.95;
+  }
+
+  50% {
+    transform: translate(0px, 0px);
+    scale: 0.9;
+  }
+
+  75% {
+    transform: translate(-4px, -2px);
+    scale: 0.9;
+  }
+
+  100% {
+    transform: translate(0, 0);
+    scale: 1;
+  }
+}

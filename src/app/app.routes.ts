@@ -24,5 +24,10 @@ export const routes: Routes = [
     component: AboutComponent,
     title: 'Sobre nós - Use Venus Store',
   },
+  {
+    path: 'cart',
+    component: AboutComponent,
+    title: 'Carrinho - Use Venus Store',
+  },
   { path: '**', component: ApresentationComponent }
 ];
