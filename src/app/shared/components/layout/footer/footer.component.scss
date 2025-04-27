@@ -4,6 +4,12 @@
   padding: 32px 24px;
   position: relative;
   text-align: center;
+  overflow: hidden;
+
+
+  @media screen and (min-width: 768px) {
+    overflow: visible;
+  }
 
   .flower {
     position: absolute;
@@ -31,7 +37,7 @@
       right: -440px;
       margin: auto;
       rotate: -20deg;
-      bottom: 0px;
+      bottom: 8px;
     }
   }
 
