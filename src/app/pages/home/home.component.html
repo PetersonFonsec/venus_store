@@ -1,1 +1,45 @@
-<p>home works!</p>
+<main id="home">
+  <div id="home_container">
+    <section id="home_tags">
+      <h1 class="title">Marcas</h1>
+
+      <ul>
+        @for (tag of tags; track $index) {
+          <li>
+            <app-tag-item />
+          </li>
+        }
+      </ul>
+    </section>
+
+    <section id="home_product">
+      <h2 class="title">Produtos em estoque</h2>
+
+      <ul>
+        @for (product of products; track $index) {
+          <li>
+            <app-product-item />
+          </li>
+        }
+      </ul>
+    </section>
+  </div>
+</main>
+
+<nav>
+  <ul>
+    <li>
+      <a href="">Carrinho</a>
+    </li>
+
+    <li>
+      <a href="">Inicio</a>
+    </li>
+
+    <li>
+      <a href="">Sobre</a>
+    </li>
+  </ul>
+</nav>
+
+<app-footer />
