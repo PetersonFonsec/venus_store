@@ -4,7 +4,7 @@
       <h1 class="title">Marcas</h1>
 
       <ul>
-        @for (tag of tags; track $index) {
+        @for (tag of tags(); track $index) {
           <li>
             <app-tag-item />
           </li>
@@ -16,7 +16,7 @@
       <h2 class="title">Produtos em estoque</h2>
 
       <ul>
-        @for (product of products; track $index) {
+        @for (product of products(); track $index) {
           <li>
             <app-product-item />
           </li>

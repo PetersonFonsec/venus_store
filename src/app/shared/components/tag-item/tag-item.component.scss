@@ -1,0 +1,16 @@
+.tag {
+  border-radius: 100%;
+  border: 1px solid var(--primary-color);
+  width: 86px;
+  height: 86px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
