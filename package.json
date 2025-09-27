@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:venus-store": "node dist/venus-store/server/server.mjs"
+    "serve:ssr:venus-store": "node dist/venus-store/server/server.mjs",
+    "server": "http-server ./dist/venus-store/browser -p 8080"
   },
   "private": true,
   "dependencies": {

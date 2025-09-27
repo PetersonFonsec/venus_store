@@ -12,7 +12,7 @@ export const routes: Routes = [
   {
     path: 'apresentation',
     component: ApresentationComponent,
-    title: 'Use Venus Store',
+    title: 'Use Venus Store | Realce sua beleza com a Venus Store',
   },
   {
     path: 'home',
