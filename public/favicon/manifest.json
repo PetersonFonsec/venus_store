@@ -4,8 +4,8 @@
   "display": "fullscreen",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
-  "scope": ".",
-  "start_url": "https://www.usevenusstore.com.br/",
+  "scope": "./",
+  "start_url": "./",
   "icons": [
     {
       "src": "/favicon/android-icon-36x36.png",
