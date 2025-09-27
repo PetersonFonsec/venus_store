@@ -1,11 +1,11 @@
 {
-  "name": "venus-store",
-  "short_name": "venus-store",
+  "name": "Venus Store",
+  "short_name": "Venus Store",
   "display": "fullscreen",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
-  "scope": "./",
-  "start_url": "./",
+  "scope": ".",
+  "start_url": "https://www.usevenusstore.com.br/",
   "icons": [
     {
       "src": "/favicon/android-icon-36x36.png",
