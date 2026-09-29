@@ -1,12 +1,19 @@
 .tag {
-  border-radius: 100%;
-  border: 1px solid var(--primary-color);
-  width: 86px;
-  height: 86px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 96px;
+  height: 96px;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--line);
   cursor: pointer;
+  transition: var(--transition);
+
+  &:hover {
+    border-color: var(--rose);
+    transform: translateY(-4px);
+  }
 
   img {
     width: 100%;

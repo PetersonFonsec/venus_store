@@ -1,24 +1,118 @@
 <main id="apresentation">
-  <div id="apresentation_container">
-    <h1 id="apresentation_title">
-      Realce sua beleza com a
-      <b>Venus Store</b>
-    </h1>
+  <!-- Scroll story: the 3D bottle stays pinned while the chapters scroll by -->
+  <section class="story" #story aria-label="Conheça o Eudora Lyra">
+    <div class="story_stage">
+      <app-lyra-stage [progress]="progress()" />
 
-    <app-button routerLink="../home">Conhecer o estoque</app-button>
+      <div class="story_rail" aria-hidden="true">
+        <span class="story_rail-count">{{ progressLabel() }}</span>
+        <span class="story_rail-track"><span [style.transform]="'scaleY(' + progress() + ')'"></span></span>
+        <span class="story_rail-count">04</span>
+      </div>
+    </div>
 
-  </div>
-  <div id="apresentation_background">
-    <img width="79px" height="47px" id="apresentation_background_flower_1" src="assets/images/flower.svg" alt="Icone de uma flor azul" />
+    <div class="story_chapters">
+      <article class="chapter chapter--hero" [class.is-active]="activeChapter() === 0">
+        <span class="eyebrow">Perfumaria · Maquiagem · Cuidados</span>
+        <h1 class="display chapter_hero-title">
+          Realce sua <em>beleza</em>
+          <span>com a Venus Store</span>
+        </h1>
+        <p class="chapter_text">
+          Uma curadoria de fragrâncias e cosméticos para transformar o cuidado de todo dia em um pequeno ritual.
+        </p>
+        <div class="chapter_actions">
+          <a class="btn btn--primary" routerLink="/home">
+            Conhecer o estoque
+            <span class="btn_arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="btn btn--ghost" routerLink="/about">Sobre a Venus</a>
+        </div>
+        <span class="chapter_scroll" aria-hidden="true">Role para explorar</span>
+      </article>
 
-    <img width="68px" height="40px" id="apresentation_background_flower_2" src="assets/images/flower.svg" alt="Icone de uma flor azul" />
+      @for (chapter of chapters; track chapter.index; let i = $index) {
+        <article class="chapter" [class.is-active]="activeChapter() === i + 1">
+          <div class="chapter_card">
+            <span class="chapter_index">{{ chapter.index }}</span>
+            <span class="eyebrow">{{ chapter.eyebrow }}</span>
+            <h2 class="title">
+              {{ chapter.title }} <em>{{ chapter.titleAccent }}</em>
+            </h2>
+            <p class="chapter_text">{{ chapter.text }}</p>
+          </div>
+        </article>
+      }
 
-    <img width="28px" height="17px" id="apresentation_background_flower_3" src="assets/images/flower.svg" alt="Icone de uma flor azul" />
+      <article class="chapter" [class.is-active]="activeChapter() === 4">
+        <div class="chapter_card">
+          <span class="chapter_index">04</span>
+          <span class="eyebrow">Eudora Lyra</span>
+          <h2 class="title">Encontre a sua <em>assinatura</em></h2>
+          <p class="chapter_text">Lyra e muitas outras fragrâncias esperam por você no nosso estoque.</p>
+          <a class="btn btn--primary" routerLink="/home">
+            Ver produtos
+            <span class="btn_arrow" aria-hidden="true">→</span>
+          </a>
+          <small class="chapter_credit">Modelo 3D do frasco reconstruído proceduralmente em código.</small>
+        </div>
+      </article>
+    </div>
+  </section>
 
-    <img width="400px" height="400px" id="apresentation_background_logo" src="assets/images/logo.svg" alt="Logo Use venus store" />
-  </div>
+  <!-- Marquee -->
+  <section class="marquee" aria-label="O que você encontra">
+    <div class="marquee_track">
+      @for (loop of [0, 1]; track loop) {
+        <div class="marquee_group" [attr.aria-hidden]="loop === 1">
+          @for (word of marquee; track word) {
+            <span>{{ word }}</span>
+            <img src="assets/images/flower.svg" width="34" height="20" alt="" />
+          }
+        </div>
+      }
+    </div>
+  </section>
 
-  <footer id="apresentation_footer">
-    <small>© 2025 - Todos os direitos reservados </small>
-  </footer>
+  <!-- Categories -->
+  <section class="categories container" aria-labelledby="categories-title">
+    <header class="section-head">
+      <span class="eyebrow">Categorias</span>
+      <h2 class="title" id="categories-title">Tudo para o seu <em>ritual</em></h2>
+    </header>
+
+    <ul class="categories_grid">
+      @for (category of categories; track category.name; let i = $index) {
+        <li>
+          <a
+            class="category"
+            routerLink="/home"
+            [style.--hue]="category.hue"
+            (pointermove)="tilt($event)"
+            (pointerleave)="resetTilt($event)"
+          >
+            <span class="category_number">0{{ i + 1 }}</span>
+            <span class="category_orb" aria-hidden="true"></span>
+            <span class="category_body">
+              <strong class="category_name">{{ category.name }}</strong>
+              <span class="category_caption">{{ category.caption }}</span>
+            </span>
+            <span class="category_arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <!-- Manifesto -->
+  <section class="manifesto container">
+    <img class="manifesto_logo" src="assets/images/logo.svg" width="120" height="120" loading="lazy" alt="" />
+    <blockquote class="display manifesto_quote">
+      Beleza é <em>presença</em>: o perfume que fica, o gesto que se repete, o cuidado que é só seu.
+    </blockquote>
+    <a class="btn btn--primary" routerLink="/home">
+      Conhecer o estoque
+      <span class="btn_arrow" aria-hidden="true">→</span>
+    </a>
+  </section>
 </main>

@@ -1,29 +1,29 @@
-<main id="home">
-  <div id="home_container">
-    <section id="home_tags">
-      <h1 class="title">Marcas</h1>
+<main id="home" class="container">
+  <header class="home_head">
+    <span class="eyebrow">Estoque</span>
+    <h1 class="display home_title">Produtos <em>em estoque</em></h1>
+    <p class="home_lead">Escolha pela marca ou explore tudo o que chegou por aqui.</p>
+  </header>
 
-      <ul>
-        @for (tag of tags(); track $index) {
-          <li>
-            <app-tag-item />
-          </li>
-        }
-      </ul>
-    </section>
+  <section class="home_tags" aria-labelledby="home-brands">
+    <h2 class="home_label" id="home-brands">Marcas</h2>
+    <ul>
+      @for (tag of tags(); track $index) {
+        <li>
+          <app-tag-item />
+        </li>
+      }
+    </ul>
+  </section>
 
-    <section id="home_product">
-      <h2 class="title">Produtos em estoque</h2>
-
-      <ul>
-        @for (product of products(); track $index) {
-          <li>
-            <app-product-item />
-          </li>
-        }
-      </ul>
-    </section>
-  </div>
+  <section class="home_product" aria-labelledby="home-products">
+    <h2 class="visually-hidden" id="home-products">Produtos</h2>
+    <ul>
+      @for (product of products(); track $index) {
+        <li>
+          <app-product-item />
+        </li>
+      }
+    </ul>
+  </section>
 </main>
-
-<app-footer />

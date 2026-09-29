@@ -1,25 +1,25 @@
-<footer id="footer">
-  <img
-    width="47px"
-    height="79px"
-    loading="lazy"
-    class="flower primary"
-    src="assets/images/flower.svg"
-    alt="Icone de uma flor azul"
-  />
+<footer class="footer">
+  <div class="footer_inner container">
+    <div class="footer_brand">
+      <img src="assets/images/logo.svg" width="72" height="72" loading="lazy" alt="" />
+      <p class="footer_statement">Realce sua <em>beleza</em>.</p>
+    </div>
 
-  <img
-    width="47px"
-    height="79px"
-    loading="lazy"
-    class="flower invert secundary"
-    src="assets/images/flower.svg"
-    alt="Icone de uma flor azul"
-  />
+    <nav class="footer_nav" aria-label="Rodapé">
+      <span class="footer_label">Navegue</span>
+      <a routerLink="/apresentation">Início</a>
+      <a routerLink="/home">Estoque</a>
+      <a routerLink="/about">Sobre nós</a>
+    </nav>
 
-  <div id="footer_container">
-    <span>Feito com 💙 por um dev curioso.</span>
-    <hr />
-    <small>© 2025 - Todos os direitos reservados </small>
+    <div class="footer_note">
+      <span class="footer_label">Venus Store</span>
+      <p>Fragrâncias, maquiagem e cuidados escolhidos com carinho.</p>
+    </div>
+  </div>
+
+  <div class="footer_bottom container">
+    <small>© {{ year }} Venus Store — Todos os direitos reservados</small>
+    <small>Feito com 💙 por um dev curioso.</small>
   </div>
 </footer>

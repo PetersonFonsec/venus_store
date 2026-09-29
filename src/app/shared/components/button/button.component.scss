@@ -1,34 +1,32 @@
 .button {
   cursor: pointer;
-  border: none;
   display: block;
-  font-style: normal;
-  max-width: 100%;
-  transition: var(--transition);
   width: 100%;
-  font-weight: var(--font-weight-bold);
+  max-width: 100%;
+  border: 1px solid transparent;
   border-radius: var(--border-radius);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.06em;
+  transition: var(--transition);
 
-  //Color
   &--primary {
-    background: var(--primary-color);
-    color: #fff;
+    background: var(--ink);
+    color: var(--porcelain);
 
     &:active,
     &:hover {
-      background-color: var(--primary-ligth-color);
+      background: var(--rose-deep);
     }
   }
 
-  //Size
   &--medium {
-    padding: 20px;
-    font-size: var(--font-size-3);
+    padding: 18px 28px;
+    font-size: 15px;
   }
 
   &--small {
-    padding: 8px;
-    font-size: var(--font-size-2);
+    padding: 12px 20px;
+    font-size: 13px;
   }
 
   &:disabled {

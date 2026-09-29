@@ -1,55 +1,95 @@
-#footer {
-  background-color: var(--primary-dark-color);
-  font-weight: var(--font-weight-bold);
-  padding: 32px 24px;
+@use '../../../scss/variables/breakpoints';
+
+.footer {
   position: relative;
-  text-align: center;
+  margin-top: 120px;
+  padding-top: 88px;
+  color: var(--porcelain);
+  background: var(--ink);
+  border-radius: 48px 48px 0 0;
   overflow: hidden;
 
-
-  @media screen and (min-width: 768px) {
-    overflow: visible;
-  }
-
-  .flower {
+  &::before {
+    content: '';
     position: absolute;
-    transition: var(--transition);
+    width: 720px;
+    height: 720px;
+    right: -240px;
+    top: -360px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(192, 90, 120, 0.4), transparent);
   }
 
-  .flower.primary {
-    top: -28px;
-    left: 0;
+  &_inner {
+    position: relative;
+    display: grid;
+    gap: 48px;
+    grid-template-columns: 1.4fr 1fr 1fr;
 
-    @media screen and (min-width: 768px) {
-      left: 15%;
-      top: -40px;
-      transform: scaleX(-1) rotate(0);
+    @media (max-width: breakpoints.$tablet) {
+      grid-template-columns: 1fr;
     }
   }
 
-  .flower.secundary {
-    bottom: -28px;
-    rotate: -124.49deg;
-    right: 0;
+  &_brand img {
+    width: 72px;
+    height: 72px;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+    margin-bottom: 24px;
+  }
 
-    @media screen and (min-width: 768px) {
-      left: 0;
-      right: -440px;
-      margin: auto;
-      rotate: -20deg;
-      bottom: 8px;
+  &_statement {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1;
+
+    em {
+      color: var(--blush-deep);
     }
   }
 
-  &_container {
-    width: 100%;
-    max-width: 360px;
-    margin: 0 auto;
+  &_label {
+    display: block;
+    margin-bottom: 18px;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--champagne);
+  }
 
-    hr {
-      margin: 16px 0;
-      border: 0;
-      border-top: 1px solid var(--primary-color);
+  &_nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    a {
+      width: fit-content;
+      opacity: 0.8;
+      transition: opacity 0.3s, transform 0.4s var(--ease-out);
+
+      &:hover {
+        opacity: 1;
+        transform: translateX(6px);
+      }
     }
+  }
+
+  &_note p {
+    max-width: 260px;
+    line-height: 1.6;
+    opacity: 0.75;
+  }
+
+  &_bottom {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 80px;
+    padding-block: 28px;
+    border-top: 1px solid rgba(251, 247, 244, 0.14);
+    opacity: 0.6;
   }
 }

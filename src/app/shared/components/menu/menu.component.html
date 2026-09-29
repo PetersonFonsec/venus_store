@@ -1,1 +1,25 @@
-<p>menu works!</p>
+<header class="menu container">
+  <a class="menu_brand" routerLink="/apresentation" (click)="close()" aria-label="Venus Store — início">
+    <img src="assets/images/logo.svg" width="40" height="40" alt="" />
+    <span>Venus <em>Store</em></span>
+  </a>
+
+  <button
+    class="menu_toggle"
+    type="button"
+    [attr.aria-expanded]="open()"
+    aria-controls="menu-links"
+    (click)="toggle()"
+  >
+    <span class="visually-hidden">Abrir menu</span>
+    <span class="menu_toggle-line"></span>
+    <span class="menu_toggle-line"></span>
+  </button>
+
+  <nav id="menu-links" class="menu_links" [class.is-open]="open()" aria-label="Principal">
+    <a routerLink="/apresentation" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="close()">Início</a>
+    <a routerLink="/home" routerLinkActive="is-active" (click)="close()">Estoque</a>
+    <a routerLink="/about" routerLinkActive="is-active" (click)="close()">Sobre</a>
+    <a class="menu_cta" routerLink="/home" (click)="close()">Conhecer o estoque</a>
+  </nav>
+</header>

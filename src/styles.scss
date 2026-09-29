@@ -1,93 +1,247 @@
-/* You can add global styles to this file, and also import other style files */
+/* Venus Store — global design tokens and base styles */
 :root {
-  //Colors
-  --primary-ligth-color: #006BF1;
-  --primary-dark-color: #AACFFD;
-  --primary-color: #004CAB;
-  --dark-color: #000;
+  // Palette
+  --porcelain: #fbf7f4;
+  --porcelain-deep: #f4ece8;
+  --blush: #f3dce2;
+  --blush-deep: #e9c3cd;
+  --rose: #c05a78;
+  --rose-deep: #93375a;
+  --ink: #1d2030;
+  --ink-soft: #4a4d5e;
+  --mist: #8a8b99;
+  --brand: #004cab;
+  --champagne: #c9b391;
+  --line: rgba(29, 32, 48, 0.12);
 
-  --background-color: #fff;
+  // Legacy aliases used by existing components
+  --primary-color: var(--ink);
+  --primary-ligth-color: var(--rose);
+  --primary-dark-color: var(--blush);
+  --dark-color: var(--ink);
+  --background-color: var(--porcelain);
 
-  //Fonts
-  --font-family: 'Nunito', sans-serif;
+  // Typography
+  --font-display: 'Cormorant Garamond', 'Didot', 'Bodoni 72', Georgia, serif;
+  --font-family: 'Manrope', 'Helvetica Neue', Arial, sans-serif;
 
-  //Fonts sizes
+  --font-size-small: 13px;
   --font-size-normal: 16px;
-  --font-size-small: 14px;
   --font-size-big: 18px;
+  --font-size-title-normal: clamp(28px, 4vw, 44px);
 
-  --font-size-title-normal: 22px;
-
-  //Fonts weight
   --font-weight-normal: 400;
-  --font-weight-bold: 700;
-  --font-weight-bolder: 900;
+  --font-weight-bold: 600;
+  --font-weight-bolder: 800;
 
-  //Container
-  --container-max-width: 1200px;
+  // Layout
+  --container-max-width: 1240px;
   --container-max-width--small: 400px;
-  --container-padding: 20px;
+  --container-padding: clamp(20px, 4vw, 48px);
+  --header-height: 76px;
 
-  //Appearance
-  --transition: 0.3s ease-in-out all;
-  --border-radius: 70px;
+  // Appearance
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition: 0.45s var(--ease-out) all;
+  --border-radius: 999px;
+  --radius-card: 28px;
+  --shadow-soft: 0 30px 60px -30px rgba(147, 55, 90, 0.35);
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  font-family: var(--font-family);
   margin: 0;
   padding: 0;
 }
 
 html {
   background-color: var(--background-color);
-  color: var(--primary-color);
+  color: var(--ink);
+  font-family: var(--font-family);
   font-weight: var(--font-weight-normal);
   font-size: var(--font-size-normal);
-  position: relative;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
 
+body {
   min-height: 100vh;
-  display: flex;
-
-  flex-direction: column;
-  width: 100vw;
   overflow-x: hidden;
-}
 
-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: var(--container-padding);
-}
-
-.title {
-  font-size: var(--font-size-title-normal);
-  font-weight: var(--font-weight-bold);
-  color: var(--primary-color);
-  width: max-content;
-  margin-bottom: 4px;
-  position: relative;
-
-  &::after {
+  // Fixed ambient glow on its own layer (a fixed background-attachment repaints badly under the WebGL canvas).
+  &::before {
     content: '';
-    position: absolute;
-    width: 100%;
-    height: 4px;
-    background-color: var(--primary-color);
-    bottom: -2px;
-    left: 0;
-    border-radius: var(--border-radius);
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(1200px 700px at 85% -10%, rgba(243, 220, 226, 0.9), transparent 60%),
+      radial-gradient(900px 600px at -10% 30%, rgba(233, 195, 205, 0.35), transparent 60%);
   }
 }
 
-app-home {
-  flex: 1;
+img,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+::selection {
+  background: var(--blush-deep);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 3px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-inline: var(--container-padding);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+
+  &::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: currentColor;
+  }
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+
+  em {
+    font-style: italic;
+    color: var(--rose);
+  }
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-title-normal);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--ink);
+
+  em {
+    font-style: italic;
+    color: var(--rose);
+  }
+}
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 18px 30px;
+  border-radius: var(--border-radius);
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition: var(--transition);
+
+  &_arrow {
+    transition: transform 0.5s var(--ease-out);
+  }
+
+  &:hover &_arrow {
+    transform: translateX(5px);
+  }
+
+  &--primary {
+    color: var(--porcelain);
+    background: var(--ink);
+    box-shadow: var(--shadow-soft);
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(120deg, var(--rose-deep), var(--rose));
+      transform: translateY(101%);
+      transition: transform 0.6s var(--ease-out);
+    }
+
+    &:hover::before {
+      transform: translateY(0);
+    }
+  }
+
+  &--ghost {
+    color: var(--ink);
+    border-color: var(--line);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
+
+    &:hover {
+      border-color: var(--ink);
+    }
+  }
+}
+
+.section-head {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  height: inherit;
+  gap: 18px;
+  margin-bottom: 56px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
