@@ -1,0 +1,171 @@
+@for (p of current(); track p.slug) {
+  <!-- ============ TOPO ============ -->
+  <section class="top container">
+    <div class="top__media">
+      <div class="top__frame" reveal="clip" [revealOnLoad]="true">
+        @if (p.image) {
+          <img [src]="p.image" [alt]="p.name" />
+        } @else {
+          <app-product-art class="top__art" [kind]="p.art.kind" [tone]="p.art.tone" [label]="p.line" />
+        }
+      </div>
+      @if (catalog.discount(p)) {
+        <app-stamp class="top__stamp" text="Oferta da semana • Oferta da semana • ">
+          <span class="top__off display">−{{ catalog.discount(p) }}%</span>
+        </app-stamp>
+      }
+    </div>
+
+    <div class="top__info">
+      <nav class="crumbs" aria-label="Você está em" reveal [revealOnLoad]="true">
+        <a routerLink="/produtos" class="link">Produtos</a>
+        <span>/</span>
+        <span>{{ catalog.categoryLabel(p.category) }}</span>
+      </nav>
+
+      <p class="top__line" reveal [revealOnLoad]="true" [revealDelay]="0.05">{{ p.line }} · {{ p.size }}</p>
+      <h1 class="top__name display" reveal="words" [revealOnLoad]="true" [revealDelay]="0.1">{{ p.name }}</h1>
+
+      <button type="button" class="top__rating" (click)="motion.scrollTo('#opiniao')" reveal [revealOnLoad]="true" [revealDelay]="0.2">
+        <app-stars [value]="p.review.rating" />
+        <span class="link">Ler a opinião da {{ seller.name }}</span>
+      </button>
+
+      <div class="top__buy" reveal [revealOnLoad]="true" [revealDelay]="0.3">
+        <p class="price">
+          @if (p.promoPrice) {
+            <strong class="display">{{ p.promoPrice | brl }}</strong>
+            <s>{{ p.price | brl }}</s>
+          } @else {
+            <strong class="display">{{ p.price | brl }}</strong>
+          }
+        </p>
+
+        <p class="stock" [class.stock--low]="p.stock <= 2">
+          <span class="stock__dot"></span>
+          @if (p.stock <= 2) {
+            Últimas {{ p.stock }} unidades em estoque
+          } @else {
+            {{ p.stock }} unidades em estoque
+          }
+        </p>
+
+        <div class="buy">
+          <div class="qty" role="group" aria-label="Quantidade">
+            <button type="button" (click)="step(-1)" [disabled]="qty() <= 1" aria-label="Diminuir"><app-icon name="minus" /></button>
+            <output>{{ qty() }}</output>
+            <button type="button" (click)="step(1)" [disabled]="qty() >= p.stock" aria-label="Aumentar"><app-icon name="plus" /></button>
+          </div>
+          <button type="button" class="btn buy__add" magnetic="0.15" (click)="bag.add(p, qty())">
+            <span data-magnetic-inner>Adicionar à sacola</span>
+            <app-icon name="bag" />
+          </button>
+        </div>
+
+        <a class="quick link" [href]="bag.quickOrderLink(p, qty())" target="_blank" rel="noopener">
+          <app-icon name="whatsapp" /> Ou peça só este direto pelo WhatsApp
+        </a>
+      </div>
+
+      <div class="details" reveal [revealOnLoad]="true" [revealDelay]="0.4">
+        <details open>
+          <summary>Sobre o produto <app-icon name="plus" /></summary>
+          <p>{{ p.description }}</p>
+        </details>
+        <details>
+          <summary>Como usar <app-icon name="plus" /></summary>
+          <p>{{ p.howToUse }}</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OPINIÃO ============ -->
+  <section class="opinion section" id="opiniao">
+    <div class="opinion__inner container">
+      <header class="opinion__head">
+        <p class="eyebrow eyebrow--light" reveal>Na minha opinião</p>
+        <app-stars [value]="p.review.rating" reveal />
+      </header>
+
+      <blockquote class="opinion__quote display" reveal="scrub">“{{ p.review.text }}”</blockquote>
+
+      <div class="opinion__grid">
+        <div class="opinion__fact" reveal>
+          <span>Ideal para</span>
+          <p class="display">{{ p.review.bestFor }}</p>
+        </div>
+        <div class="opinion__fact" reveal [revealDelay]="0.08">
+          <span>O que eu mais gosto</span>
+          <ul class="opinion__tags">
+            @for (h of p.review.highlights; track h) {
+              <li>{{ h }}</li>
+            }
+          </ul>
+        </div>
+        @if (p.review.tip) {
+          <div class="opinion__tip" reveal [revealDelay]="0.16">
+            <span>Dica da {{ seller.name }}</span>
+            <p class="script">{{ p.review.tip }}</p>
+          </div>
+        }
+      </div>
+
+      <footer class="opinion__sign" reveal>
+        <span class="script">{{ seller.name }}</span>
+        <small>{{ seller.role }}</small>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ============ PIRÂMIDE OLFATIVA ============ -->
+  @if (p.notes; as notes) {
+    <section class="notes section container">
+      <header class="notes__head">
+        <p class="eyebrow" reveal>Pirâmide olfativa</p>
+        <h2 class="display h2" reveal="words">Como ele <em>evolui</em> na pele</h2>
+      </header>
+      <ol class="notes__list">
+        <li class="notes__tier" reveal>
+          <span class="notes__label">Saída <small>primeiros minutos</small></span>
+          <span class="notes__value display">{{ notes.top.join(', ') }}</span>
+        </li>
+        <li class="notes__tier" reveal [revealDelay]="0.08">
+          <span class="notes__label">Coração <small>as primeiras horas</small></span>
+          <span class="notes__value display">{{ notes.heart.join(', ') }}</span>
+        </li>
+        <li class="notes__tier" reveal [revealDelay]="0.16">
+          <span class="notes__label">Fundo <small>o que fica no fim do dia</small></span>
+          <span class="notes__value display">{{ notes.base.join(', ') }}</span>
+        </li>
+      </ol>
+    </section>
+  }
+
+  <!-- ============ RELACIONADOS ============ -->
+  <section class="related section container">
+    <header class="related__head">
+      <h2 class="display h2" reveal="words">Você também <em>vai gostar</em></h2>
+      <a routerLink="/produtos" class="link">Ver todos</a>
+    </header>
+    <ul class="related__grid">
+      @for (r of related(); track r.slug) {
+        <li reveal><app-product-card [product]="r" /></li>
+      }
+    </ul>
+  </section>
+
+  <!-- Barra fixa de compra no mobile -->
+  <div class="mbar">
+    <div>
+      <small>{{ p.line }}</small>
+      <strong>{{ p.promoPrice ?? p.price | brl }}</strong>
+    </div>
+    <button type="button" class="btn" (click)="bag.add(p, qty())">Adicionar <app-icon name="bag" /></button>
+  </div>
+} @empty {
+  <section class="missing container">
+    <h1 class="display h1">Produto <em>não encontrado</em></h1>
+    <a routerLink="/produtos" class="btn">Voltar aos produtos</a>
+  </section>
+}

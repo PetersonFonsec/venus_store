@@ -1,0 +1,59 @@
+<header class="header" [class.is-hidden]="hidden()" [class.is-scrolled]="scrolled()" [class.is-menu]="menuOpen()">
+  <div class="header__inner container">
+    <a routerLink="/" class="brand" aria-label="Use Vênus — página inicial">
+      <span class="brand__use">use</span>
+      <span class="brand__name script">Vênus</span>
+    </a>
+
+    <nav class="nav" aria-label="Principal">
+      @for (link of links; track link.path) {
+        <a
+          class="nav__link link"
+          [routerLink]="link.path"
+          routerLinkActive="link--active"
+          [routerLinkActiveOptions]="{ exact: link.exact }"
+          >{{ link.label }}</a
+        >
+      }
+    </nav>
+
+    <div class="header__actions">
+      <button
+        type="button"
+        class="bag-btn"
+        [class.is-pulse]="pulse()"
+        magnetic="0.25"
+        (click)="bag.open.set(true)"
+        [attr.aria-label]="'Abrir sacola com ' + bag.count() + ' itens'"
+      >
+        <span data-magnetic-inner class="bag-btn__inner">
+          <span class="bag-btn__label">Sacola</span>
+          <span class="bag-btn__count">{{ bag.count() }}</span>
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="menu-btn"
+        (click)="setMenu(!menuOpen())"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="mobile-menu"
+      >
+        <span class="menu-btn__lines"></span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" [class.is-open]="menuOpen()" [attr.aria-hidden]="!menuOpen()">
+  <nav class="mobile-menu__nav container" aria-label="Menu mobile">
+    @for (link of links; track link.path; let i = $index) {
+      <a class="mobile-menu__link display" [routerLink]="link.path" [style.--i]="i" [attr.tabindex]="menuOpen() ? 0 : -1">
+        <span>{{ link.label }}</span>
+        <sup>0{{ i + 1 }}</sup>
+      </a>
+    }
+  </nav>
+  <p class="mobile-menu__foot container">Pedidos pelo WhatsApp · Entrega em São Paulo</p>
+</div>

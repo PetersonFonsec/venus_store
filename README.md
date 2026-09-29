@@ -1,27 +1,42 @@
-# VenusStore
+# Use Vênus
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.5.
+Vitrine O Boticário com curadoria e opinião da consultora. Pedidos pelo WhatsApp.
 
-## Development server
+Angular 19 com saída **estática** (`outputMode: "static"`): no build todas as rotas —
+inclusive uma página por produto — são pré-renderizadas em `dist/venus-store/browser`.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Rodando
 
-## Code scaffolding
+```bash
+npm install
+npm start          # dev em http://localhost:4200
+npm run build      # gera o site estático
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Onde fica cada coisa
 
-## Build
+| Caminho | O quê |
+| --- | --- |
+| `src/app/core/data/catalog.mock.ts` | Conteúdo de exemplo (produtos, opinião, dados da vendedora, WhatsApp) |
+| `src/app/core/models/product.model.ts` | Formato dos dados — espelha os custom types que irão para o Prismic |
+| `src/app/core/services/catalog.service.ts` | Única porta de leitura do conteúdo |
+| `src/app/core/services/bag.service.ts` | Sacola (localStorage) e montagem da mensagem do WhatsApp |
+| `src/app/core/services/motion.service.ts` | Smooth scroll (Lenis) + GSAP/ScrollTrigger |
+| `src/app/app.routes.server.ts` | Lista de slugs pré-renderizados |
+| `src/app/shared/directives` | `reveal`, `parallax`, `magnetic`, `tilt` |
+| `src/app/shared/ui` | Cursor, header, sacola, preloader, card, ilustração dos produtos... |
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Efeitos
 
-## Running unit tests
+- `reveal="words|fade|clip|scrub"` — entrada ligada ao scroll (`revealOnLoad` para o topo da página).
+- `parallax="-10"` — deslocamento vertical no scroll.
+- `magnetic="0.3"` — elemento puxado pelo cursor (filho com `data-magnetic-inner` anda mais).
+- `data-cursor="Ver"` — o cursor vira um círculo com o texto ao passar por cima.
+- Tudo respeita `prefers-reduced-motion`; cursor customizado só aparece com mouse.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Próximos passos (Prismic)
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Criar os custom types `product` e `seller` seguindo `product.model.ts`.
+2. Trocar a origem de dados do `CatalogService` e o `getPrerenderParams` para ler a API no build.
+3. Webhook do Prismic → Deploy Hook da Vercel, para publicar quando ela salvar um produto.
+4. Com fotos reais, preencher `image` no produto — o card e a página já trocam a ilustração pela foto.

@@ -1,33 +1,24 @@
 import { Routes } from '@angular/router';
-import { ApresentationComponent } from './pages/apresentation/apresentation.component';
-import { HomeComponent } from './pages/home/home.component';
-import { AboutComponent } from './pages/about/about.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/apresentation',
-    pathMatch: 'full'
+    loadComponent: () => import('./pages/home/home.component').then((m) => m.HomeComponent),
+    title: 'Use Vênus | Beleza O Boticário escolhida a dedo',
   },
   {
-    path: 'apresentation',
-    component: ApresentationComponent,
-    title: 'Use Venus Store | Realce sua beleza com a Venus Store',
+    path: 'produtos',
+    loadComponent: () => import('./pages/catalog/catalog.component').then((m) => m.CatalogComponent),
+    title: 'Produtos · Use Vênus',
   },
   {
-    path: 'home',
-    component: HomeComponent,
-    title: 'Home - Use Venus Store',
+    path: 'produtos/:slug',
+    loadComponent: () => import('./pages/product/product.component').then((m) => m.ProductComponent),
   },
   {
-    path: 'about',
-    component: AboutComponent,
-    title: 'Sobre nós - Use Venus Store',
+    path: 'sobre',
+    loadComponent: () => import('./pages/about/about.component').then((m) => m.AboutComponent),
+    title: 'Sobre mim · Use Vênus',
   },
-  {
-    path: 'cart',
-    component: AboutComponent,
-    title: 'Carrinho - Use Venus Store',
-  },
-  { path: '**', component: ApresentationComponent }
+  { path: '**', redirectTo: '' },
 ];

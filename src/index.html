@@ -74,66 +74,40 @@
       sizes="16x16"
       href="/favicon/favicon-16x16.png"
     />
-    <link rel="manifest" href="https://www.usevenusstore.com.br/favicon/manifest.json" />
+    <meta name="msapplication-TileColor" content="#F4F0E8" />
+    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png" />
+    <meta name="theme-color" content="#F4F0E8" />
+    <link rel="manifest" href="/manifest.webmanifest" />
 
-    <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-    <meta name="theme-color" content="#1976d2" />
-    <link rel="manifest" href="https://www.usevenusstore.com.br/manifest.webmanifest" />
-
-    <!-- Título da página -->
-    <title>Use Venus Store | Realce sua beleza com a Venus Store</title>
-
-    <!-- Descrição da página (SEO + Compartilhamento) -->
-    <meta name="description" content=" Realce sua beleza com a Venus Store." />
+    <title>Use Vênus | Beleza O Boticário escolhida a dedo</title>
+    <meta name="description" content="Perfumes, cuidados e maquiagem O Boticário com curadoria e opinião sincera de uma consultora. Peça pelo WhatsApp." />
 
     <!-- Open Graph (Facebook, WhatsApp, LinkedIn, etc.) -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.usevenusstore.com.br/" />
-    <meta property="og:title" content=" Realce sua beleza com a Venus Store." />
-    <meta
-      property="og:description"
-      content=" Realce sua beleza com a Venus Store."
-    />
-    <meta
-      property="og:image"
-      content="https://www.usevenusstore.com.br/imagem-compartilhamento.png"
-    />
+    <meta property="og:title" content="Use Vênus | Beleza O Boticário escolhida a dedo" />
+    <meta property="og:description" content="Curadoria O Boticário com opinião sincera. Peça pelo WhatsApp." />
+    <meta property="og:image" content="https://www.usevenusstore.com.br/imagem-compartilhamento.png" />
 
     <!-- Twitter Card (X/Twitter) -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://www.usevenusstore.com.br/" />
-    <meta
-      name="twitter:title"
-      content=" Realce sua beleza com a Venus Store."
-    />
-    <meta
-      name="twitter:description"
-      content=" Realce sua beleza com a Venus Store."
-    />
-    <meta
-      name="twitter:image"
-      content="https://www.usevenusstore.com.br/imagem-compartilhamento.png"
-    />
+    <meta name="twitter:title" content="Use Vênus | Beleza O Boticário escolhida a dedo" />
+    <meta name="twitter:description" content="Curadoria O Boticário com opinião sincera. Peça pelo WhatsApp." />
+    <meta name="twitter:image" content="https://www.usevenusstore.com.br/imagem-compartilhamento.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Manrope:wght@400..700&family=Pinyon+Script&display=swap"
       rel="stylesheet"
     />
 
-    <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-    <meta name="theme-color" content="#ffffff" />
-
-    <!-- Viewport (obrigatório para responsividade) -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Marca o documento para as animações esconderem o conteúdo antes de revelar. -->
+    <script>
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js');
+    </script>
   </head>
   <body>
     <app-root></app-root>
-    <noscript
-      >Please enable JavaScript to continue using this application.</noscript
-    >
   </body>
 </html>

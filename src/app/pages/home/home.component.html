@@ -1,29 +1,202 @@
-<main id="home">
-  <div id="home_container">
-    <section id="home_tags">
-      <h1 class="title">Marcas</h1>
+<!-- ============ HERO ============ -->
+<section class="hero" #hero>
+  <div class="hero__content container">
+    <p class="eyebrow" reveal="fade" [revealOnLoad]="true">Consultora O Boticário · {{ seller.city }}</p>
 
-      <ul>
-        @for (tag of tags(); track $index) {
-          <li>
-            <app-tag-item />
-          </li>
-        }
-      </ul>
-    </section>
+    <h1 class="hero__title display">
+      <span class="hero__line" reveal="words" [revealOnLoad]="true">Beleza</span>
+      <span class="hero__line hero__line--indent" reveal="words" [revealOnLoad]="true" [revealDelay]="0.12"><em>escolhida</em></span>
+      <span class="hero__line hero__line--end" reveal="words" [revealOnLoad]="true" [revealDelay]="0.24">a dedo.</span>
+    </h1>
 
-    <section id="home_product">
-      <h2 class="title">Produtos em estoque</h2>
+    <app-stamp class="hero__stamp" data-depth="0.4">
+      <span class="hero__stamp-mark script">V</span>
+    </app-stamp>
 
-      <ul>
-        @for (product of products(); track $index) {
-          <li>
-            <app-product-item />
-          </li>
-        }
-      </ul>
-    </section>
+    <div class="hero__floats" aria-hidden="true">
+      @for (p of heroArts; track p.slug; let i = $index) {
+        <div class="hero__float hero__float--{{ i }}" [attr.data-depth]="[1.1, -0.7, 0.8][i]">
+          <div class="hero__float-bob">
+            <app-product-art [kind]="p.art.kind" [tone]="p.art.tone" [label]="p.line" [bare]="true" />
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="hero__foot">
+      <p class="lead">
+        Perfumes, cuidados e maquiagem O Boticário — com a minha opinião sincera em cada produto. Você escolhe, eu entrego.
+      </p>
+      <div class="hero__ctas">
+        <a routerLink="/produtos" class="btn" magnetic="0.2">
+          <span data-magnetic-inner>Ver produtos</span>
+          <app-icon name="arrow" />
+        </a>
+        <button type="button" class="btn btn--ghost" (click)="scrollTo('#promocoes')">Promoções da semana</button>
+      </div>
+      <button type="button" class="hero__scroll" (click)="scrollTo('#manifesto')" aria-label="Rolar para baixo">
+        <span></span>
+      </button>
+    </div>
   </div>
-</main>
+</section>
 
-<app-footer />
+<!-- ============ MARQUEE ============ -->
+<div class="band">
+  <app-marquee class="band__marquee display" [items]="marquee" />
+</div>
+
+<!-- ============ MANIFESTO ============ -->
+<section class="manifesto section container" id="manifesto">
+  <p class="eyebrow" reveal>A curadoria</p>
+  <p class="manifesto__text display" reveal="scrub">
+    Eu não vendo tudo. Vendo o que eu <em>uso</em>, testo na minha pele e indicaria para a minha melhor amiga.
+  </p>
+  <p class="manifesto__sign script" reveal [revealDelay]="0.2">{{ seller.name }}</p>
+</section>
+
+<!-- ============ PROMOÇÕES (scroll horizontal) ============ -->
+<section class="promo" id="promocoes" #promo>
+  <div class="promo__track" #promoTrack>
+    <header class="promo__intro">
+      <p class="eyebrow eyebrow--light">Só esta semana</p>
+      <h2 class="display h2">Em <em>promoção</em></h2>
+      <p class="promo__count">{{ promos.length }} produtos com desconto enquanto durar o estoque.</p>
+      <span class="promo__hint">Role <app-icon name="arrow" /></span>
+    </header>
+
+    @for (p of promos; track p.slug) {
+      <article class="deal">
+        <a class="deal__media" [routerLink]="['/produtos', p.slug]" data-cursor="Ver">
+          <app-product-art [kind]="p.art.kind" [tone]="p.art.tone" [label]="p.line" />
+          <span class="deal__off display">−{{ catalog.discount(p) }}%</span>
+        </a>
+        <div class="deal__body">
+          <span class="deal__line">{{ p.line }} · {{ p.size }}</span>
+          <h3 class="deal__name">{{ p.name }}</h3>
+          <div class="deal__row">
+            <p class="deal__price">
+              <s>{{ p.price | brl }}</s>
+              <strong>{{ p.promoPrice | brl }}</strong>
+            </p>
+            <button type="button" class="deal__add" (click)="bag.add(p)" [attr.aria-label]="'Adicionar ' + p.name + ' à sacola'">
+              <app-icon name="plus" />
+            </button>
+          </div>
+        </div>
+      </article>
+    }
+
+    <a routerLink="/produtos" [queryParams]="{ promo: 1 }" class="promo__all" data-cursor="Todas">
+      <span class="display">Ver todas as promoções</span>
+      <app-icon name="arrow-up-right" />
+    </a>
+  </div>
+</section>
+
+<!-- ============ PRATELEIRA ============ -->
+<section class="shelf section container">
+  <header class="shelf__head">
+    <div>
+      <p class="eyebrow" reveal>Em estoque agora</p>
+      <h2 class="display h2" reveal="words">Na minha <em>prateleira</em></h2>
+    </div>
+    <div class="shelf__filters" role="group" aria-label="Filtrar por categoria" reveal [revealDelay]="0.1">
+      <button type="button" class="chip" [attr.aria-pressed]="filter() === 'all'" (click)="filter.set('all')">Tudo</button>
+      @for (c of catalog.categories; track c.id) {
+        <button type="button" class="chip" [attr.aria-pressed]="filter() === c.id" (click)="filter.set(c.id)">{{ c.label }}</button>
+      }
+    </div>
+  </header>
+
+  <ul class="shelf__grid">
+    @for (p of shelf(); track p.slug; let i = $index) {
+      <li class="shelf__item" [style.--i]="i">
+        <app-product-card [product]="p" />
+      </li>
+    } @empty {
+      <li class="shelf__empty">Nada por aqui no momento — me chama que eu encomendo.</li>
+    }
+  </ul>
+
+  <div class="shelf__more">
+    <a routerLink="/produtos" class="btn btn--ghost" magnetic="0.2">
+      <span data-magnetic-inner>Ver todos os {{ catalog.products.length }} produtos</span>
+      <app-icon name="arrow" />
+    </a>
+  </div>
+</section>
+
+<!-- ============ FAVORITO ============ -->
+<section class="fav section">
+  <div class="fav__inner container">
+    <a class="fav__media" [routerLink]="['/produtos', featured.slug]" data-cursor="Ver" reveal="clip">
+      <div parallax="-8">
+        <app-product-art [kind]="featured.art.kind" [tone]="featured.art.tone" [label]="featured.line" />
+      </div>
+    </a>
+
+    <div class="fav__body">
+      <p class="eyebrow" reveal>O favorito da {{ seller.name }}</p>
+      <h2 class="display h2" reveal="words">{{ featured.name }}</h2>
+      <app-stars [value]="featured.review.rating" reveal />
+      <blockquote class="fav__quote display" reveal [revealDelay]="0.1">“{{ featured.review.text }}”</blockquote>
+
+      <dl class="fav__facts" reveal [revealDelay]="0.15">
+        <div>
+          <dt>Ideal para</dt>
+          <dd>{{ featured.review.bestFor }}</dd>
+        </div>
+        <div>
+          <dt>Destaques</dt>
+          <dd>{{ featured.review.highlights.join(' · ') }}</dd>
+        </div>
+      </dl>
+
+      <div class="fav__foot" reveal [revealDelay]="0.2">
+        <span class="fav__sign script">{{ seller.name }}</span>
+        <div class="fav__ctas">
+          <button type="button" class="btn" (click)="bag.add(featured)">
+            Adicionar · {{ featured.promoPrice ?? featured.price | brl }}
+          </button>
+          <a [routerLink]="['/produtos', featured.slug]" class="link">Ler opinião completa</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOBRE (teaser) ============ -->
+<section class="meet section container">
+  <div class="meet__portrait" reveal="clip">
+    <!-- Troque por uma foto dela (Prismic: seller.photo) -->
+    <div class="portrait" parallax="-6">
+      <span class="portrait__initial script">{{ seller.name.charAt(0) }}</span>
+      <app-stamp class="portrait__stamp" text="Opinião sincera • Desde {{ seller.since }} • " />
+    </div>
+  </div>
+  <div class="meet__body">
+    <p class="eyebrow" reveal>Prazer</p>
+    <h2 class="display h2" reveal="words">Oi, eu sou a <em>{{ seller.name }}</em>.</h2>
+    <p class="lead" reveal [revealDelay]="0.1">{{ seller.bio[1] }}</p>
+    <a routerLink="/sobre" class="btn btn--ghost" reveal [revealDelay]="0.2">Conheça minha história <app-icon name="arrow" /></a>
+  </div>
+</section>
+
+<!-- ============ COMO PEDIR ============ -->
+<section class="how section container">
+  <header class="how__head">
+    <p class="eyebrow" reveal>Simples assim</p>
+    <h2 class="display h2" reveal="words">Como <em>pedir</em></h2>
+  </header>
+  <div class="how__line" #stepsLine></div>
+  <ol class="how__steps">
+    @for (s of steps; track s.title; let i = $index) {
+      <li class="how__step" reveal [revealDelay]="i * 0.1">
+        <span class="how__num display">0{{ i + 1 }}</span>
+        <h3 class="h3">{{ s.title }}</h3>
+        <p>{{ s.text }}</p>
+      </li>
+    }
+  </ol>
+</section>

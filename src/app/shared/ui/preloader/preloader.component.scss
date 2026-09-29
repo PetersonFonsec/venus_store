@@ -1,0 +1,54 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9800;
+  display: grid;
+  place-items: center;
+  background: var(--cobalt);
+  color: var(--on-cobalt);
+  clip-path: inset(0 0 0 0);
+}
+
+.preloader__word {
+  display: flex;
+  align-items: baseline;
+  gap: 0.2em;
+  font-size: clamp(3.5rem, 12vw, 9rem);
+
+  .w:first-child {
+    font-family: var(--font-body);
+    font-size: 0.18em;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  .script {
+    font-size: 1.3em;
+    letter-spacing: 0;
+  }
+}
+
+.preloader__bar {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.preloader__line {
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+  transform-origin: left;
+}
+
+.preloader__count {
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.1em;
+}

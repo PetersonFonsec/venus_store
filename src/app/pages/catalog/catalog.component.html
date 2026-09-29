@@ -1,0 +1,57 @@
+<section class="intro container">
+  <p class="eyebrow" reveal [revealOnLoad]="true">Catálogo · atualizado toda semana</p>
+  <h1 class="display h1 intro__title">
+    <span reveal="words" [revealOnLoad]="true">Produtos</span>
+    <sup class="intro__count" reveal [revealOnLoad]="true" [revealDelay]="0.3">({{ list().length }})</sup>
+  </h1>
+  <p class="lead" reveal [revealOnLoad]="true" [revealDelay]="0.15">
+    Tudo o que está aqui eu tenho em mãos. Toque no produto para ler minha opinião — e se quiser algo que não está na lista, é só pedir.
+  </p>
+</section>
+
+<div class="bar">
+  <div class="bar__inner container">
+    <div class="bar__chips" role="group" aria-label="Categorias">
+      <button type="button" class="chip" [attr.aria-pressed]="category() === 'all'" (click)="category.set('all')">
+        Tudo <small>{{ countFor('all') }}</small>
+      </button>
+      @for (c of catalog.categories; track c.id) {
+        <button type="button" class="chip" [attr.aria-pressed]="category() === c.id" (click)="category.set(c.id)">
+          {{ c.label }} <small>{{ countFor(c.id) }}</small>
+        </button>
+      }
+    </div>
+
+    <div class="bar__tools">
+      <label class="toggle">
+        <input type="checkbox" [checked]="onlyPromo()" (change)="onlyPromo.set(!onlyPromo())" />
+        <span class="toggle__track"><span class="toggle__thumb"></span></span>
+        Só promoções
+      </label>
+
+      <label class="sort">
+        <span class="visually-hidden">Ordenar por</span>
+        <select (change)="onSort($event)">
+          @for (s of sorts; track s.id) {
+            <option [value]="s.id" [selected]="sort() === s.id">{{ s.label }}</option>
+          }
+        </select>
+      </label>
+    </div>
+  </div>
+</div>
+
+<section class="grid-wrap container">
+  <ul class="grid">
+    @for (p of list(); track p.slug; let i = $index) {
+      <li class="grid__item" [style.--i]="i % 6">
+        <app-product-card [product]="p" />
+      </li>
+    } @empty {
+      <li class="grid__empty">
+        <p class="display h3">Nada por aqui <em>agora</em>.</p>
+        <p>Me chama no WhatsApp que eu vejo se consigo encomendar pra você.</p>
+      </li>
+    }
+  </ul>
+</section>

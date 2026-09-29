@@ -1,0 +1,72 @@
+<div class="scrim" [class.is-open]="bag.open()" (click)="close()" aria-hidden="true"></div>
+
+<aside
+  class="drawer"
+  [class.is-open]="bag.open()"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="bag-title"
+  [attr.aria-hidden]="!bag.open()"
+  [attr.inert]="bag.open() ? null : ''"
+>
+  <header class="drawer__head">
+    <h2 id="bag-title" class="drawer__title display">Sacola <sup>{{ bag.count() }}</sup></h2>
+    <button type="button" class="drawer__close" (click)="close()" aria-label="Fechar sacola">
+      <app-icon name="close" />
+    </button>
+  </header>
+
+  @if (bag.items().length) {
+    <ul class="drawer__list" data-lenis-prevent>
+      @for (item of bag.items(); track item.slug; let i = $index) {
+        <li class="line" [style.--i]="i">
+          <a class="line__art" [routerLink]="['/produtos', item.slug]" (click)="close()">
+            <app-product-art [kind]="item.product.art.kind" [tone]="item.product.art.tone" />
+          </a>
+          <div class="line__body">
+            <span class="line__meta">{{ item.product.line }} · {{ item.product.size }}</span>
+            <a class="line__name" [routerLink]="['/produtos', item.slug]" (click)="close()">{{ item.product.name }}</a>
+            <div class="line__row">
+              <div class="stepper" role="group" [attr.aria-label]="'Quantidade de ' + item.product.name">
+                <button type="button" (click)="bag.setQty(item.slug, item.qty - 1)" aria-label="Diminuir">
+                  <app-icon name="minus" />
+                </button>
+                <output>{{ item.qty }}</output>
+                <button
+                  type="button"
+                  (click)="bag.setQty(item.slug, item.qty + 1)"
+                  [disabled]="item.qty >= item.product.stock"
+                  aria-label="Aumentar"
+                >
+                  <app-icon name="plus" />
+                </button>
+              </div>
+              <strong class="line__price">{{ (item.product.promoPrice ?? item.product.price) * item.qty | brl }}</strong>
+            </div>
+          </div>
+          <button type="button" class="line__remove link" (click)="bag.remove(item.slug)">Remover</button>
+        </li>
+      }
+    </ul>
+
+    <footer class="drawer__foot">
+      <div class="drawer__total">
+        <span>Total estimado</span>
+        <strong class="display">{{ bag.total() | brl }}</strong>
+      </div>
+      <a class="btn btn--wa btn--block" [href]="bag.whatsappLink()" target="_blank" rel="noopener">
+        <app-icon name="whatsapp" />
+        Finalizar pelo WhatsApp
+      </a>
+      <p class="drawer__note">
+        Você vai conversar direto comigo, a {{ seller.name }}. Eu confirmo estoque, entrega e forma de pagamento.
+      </p>
+    </footer>
+  } @else {
+    <div class="empty">
+      <p class="empty__title display">Sua sacola <em>está vazia</em></p>
+      <p class="empty__text">Escolha seus produtos e finalize o pedido comigo pelo WhatsApp.</p>
+      <a routerLink="/produtos" class="btn" (click)="close()">Ver produtos <app-icon name="arrow" /></a>
+    </div>
+  }
+</aside>
