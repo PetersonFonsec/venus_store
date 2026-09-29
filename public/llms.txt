@@ -1,13 +1,27 @@
-# Use Venus Store
+# Use Vênus
 
-> Venus Store é uma loja online de beleza. Realce sua beleza com a Venus Store: conheça as marcas disponíveis e os produtos em estoque.
+> Use Vênus é a loja de uma consultora de beleza O Boticário em São Paulo, SP. Perfumes, cuidados e maquiagem O Boticário com curadoria e opinião sincera. Os pedidos são feitos pelo WhatsApp.
 
-O site está em português (pt-BR) e é acessado em https://www.usevenusstore.com.br.
+O site está em português (pt-BR). Os produtos se dividem nas categorias Perfumaria, Corpo & Banho, Skincare e Maquiagem.
 
 ## Páginas
 
-- [Apresentação](https://www.usevenusstore.com.br/apresentation): página inicial com a proposta da loja e acesso ao estoque
-- [Home](https://www.usevenusstore.com.br/home): lista de marcas e produtos em estoque
+- [Início](https://www.usevenusstore.com.br/): apresentação da loja e produtos em destaque
+- [Produtos](https://www.usevenusstore.com.br/produtos): catálogo completo, com filtro por categoria
+- [Sobre mim](https://www.usevenusstore.com.br/sobre): quem é a consultora e como funciona o atendimento
+
+## Produtos
+
+- [Lily Eau de Parfum](https://www.usevenusstore.com.br/produtos/lily-eau-de-parfum)
+- [Floratta Blue Desodorante Colônia](https://www.usevenusstore.com.br/produtos/floratta-blue)
+- [Malbec Gold Desodorante Colônia](https://www.usevenusstore.com.br/produtos/malbec-gold)
+- [Egeo Dolce Desodorante Colônia](https://www.usevenusstore.com.br/produtos/egeo-dolce)
+- [Nativa SPA Ameixa Loção Hidratante](https://www.usevenusstore.com.br/produtos/nativa-spa-ameixa)
+- [Cuide-se Bem Deleite Hidratante Corporal](https://www.usevenusstore.com.br/produtos/cuide-se-bem-deleite)
+- [Botik Sérum Facial Vitamina C](https://www.usevenusstore.com.br/produtos/botik-vitamina-c)
+- [Make B. Batom Líquido Matte](https://www.usevenusstore.com.br/produtos/make-b-batom-liquido)
+- [Coffee Woman Seduction Desodorante Colônia](https://www.usevenusstore.com.br/produtos/coffee-woman-seduction)
+- [Nativa SPA Quinoa Creme Firmador](https://www.usevenusstore.com.br/produtos/nativa-spa-quinoa-creme)
 
 ## Opcional
 
