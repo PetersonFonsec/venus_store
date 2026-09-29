@@ -1,0 +1,14 @@
+# Use Venus Store
+
+> Venus Store é uma loja online de beleza. Realce sua beleza com a Venus Store: conheça as marcas disponíveis e os produtos em estoque.
+
+O site está em português (pt-BR) e é acessado em https://www.usevenusstore.com.br.
+
+## Páginas
+
+- [Apresentação](https://www.usevenusstore.com.br/apresentation): página inicial com a proposta da loja e acesso ao estoque
+- [Home](https://www.usevenusstore.com.br/home): lista de marcas e produtos em estoque
+
+## Opcional
+
+- [Sitemap](https://www.usevenusstore.com.br/sitemap.xml): lista de URLs públicas do site

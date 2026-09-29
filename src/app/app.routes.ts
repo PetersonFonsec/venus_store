@@ -20,11 +20,6 @@ export const routes: Routes = [
     title: 'Home - Use Venus Store',
   },
   {
-    path: 'about',
-    component: AboutComponent,
-    title: 'Sobre nós - Use Venus Store',
-  },
-  {
     path: 'cart',
     component: AboutComponent,
     title: 'Carrinho - Use Venus Store',
