@@ -1,0 +1,85 @@
+<svg viewBox="0 0 400 500" role="img" [attr.aria-label]="label()">
+  <defs>
+    <linearGradient [attr.id]="id + 'bg'" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" [attr.stop-color]="p().bg" />
+      <stop offset="1" [attr.stop-color]="p().bg2" />
+    </linearGradient>
+    <linearGradient [attr.id]="id + 'glass'" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity=".55" />
+      <stop offset=".45" stop-color="#fff" stop-opacity=".15" />
+      <stop offset="1" stop-color="#fff" stop-opacity=".4" />
+    </linearGradient>
+    <linearGradient [attr.id]="id + 'liq'" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" [attr.stop-color]="p().liquid" stop-opacity=".75" />
+      <stop offset="1" [attr.stop-color]="p().liquid" />
+    </linearGradient>
+    <linearGradient [attr.id]="id + 'metal'" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" [attr.stop-color]="p().cap" />
+      <stop offset=".35" stop-color="#fff" stop-opacity=".55" />
+      <stop offset=".6" [attr.stop-color]="p().cap" />
+      <stop offset="1" [attr.stop-color]="p().cap" />
+    </linearGradient>
+    <radialGradient [attr.id]="id + 'shadow'">
+      <stop offset="0" stop-color="#0B1B3A" stop-opacity=".22" />
+      <stop offset="1" stop-color="#0B1B3A" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  @if (!bare()) {
+    <path d="M40 500V210a160 160 0 0 1 320 0v290z" [attr.fill]="'url(#' + id + 'bg)'" />
+    <circle cx="200" cy="210" r="118" fill="#fff" opacity=".28" />
+  }
+
+  <ellipse cx="200" cy="430" rx="120" ry="14" [attr.fill]="'url(#' + id + 'shadow)'" />
+
+  @switch (kind()) {
+    @case ('perfume') {
+      <rect x="170" y="142" width="60" height="62" rx="8" [attr.fill]="'url(#' + id + 'metal)'" />
+      <rect x="184" y="200" width="32" height="16" [attr.fill]="p().cap" opacity=".85" />
+      <rect x="116" y="212" width="168" height="214" rx="28" [attr.fill]="p().liquid" opacity=".28" />
+      <rect x="130" y="246" width="140" height="166" rx="18" [attr.fill]="'url(#' + id + 'liq)'" />
+      <rect x="116" y="212" width="168" height="214" rx="28" [attr.fill]="'url(#' + id + 'glass)'" stroke="#fff" stroke-opacity=".7" />
+      <rect x="138" y="226" width="12" height="184" rx="6" fill="#fff" opacity=".45" />
+      <text x="200" y="336" text-anchor="middle" class="art-label" [attr.fill]="p().ink">{{ text() }}</text>
+    }
+    @case ('colonia') {
+      <rect x="174" y="112" width="52" height="64" rx="12" [attr.fill]="p().cap" />
+      <rect x="182" y="120" width="8" height="48" rx="4" fill="#fff" opacity=".25" />
+      <rect x="186" y="172" width="28" height="14" [attr.fill]="'url(#' + id + 'metal)'" />
+      <rect x="138" y="182" width="124" height="244" rx="46" [attr.fill]="'url(#' + id + 'liq)'" />
+      <rect x="138" y="182" width="124" height="244" rx="46" [attr.fill]="'url(#' + id + 'glass)'" stroke="#fff" stroke-opacity=".7" />
+      <rect x="154" y="208" width="10" height="190" rx="5" fill="#fff" opacity=".5" />
+      <text x="200" y="320" text-anchor="middle" class="art-label" [attr.fill]="p().ink">{{ text() }}</text>
+    }
+    @case ('lotion') {
+      <rect x="182" y="134" width="70" height="14" rx="7" [attr.fill]="p().cap" />
+      <rect x="186" y="146" width="28" height="48" rx="4" [attr.fill]="p().cap" />
+      <path d="M150 196h100q20 0 20 22v186q0 22-22 22H152q-22 0-22-22V218q0-22 20-22z" [attr.fill]="p().liquid" />
+      <rect x="130" y="262" width="140" height="96" fill="#fff" opacity=".82" />
+      <rect x="146" y="210" width="10" height="200" rx="5" fill="#fff" opacity=".3" />
+      <text x="200" y="316" text-anchor="middle" class="art-label" [attr.fill]="p().deep">{{ text() }}</text>
+    }
+    @case ('cream') {
+      <rect x="112" y="300" width="176" height="42" rx="12" [attr.fill]="'url(#' + id + 'metal)'" />
+      <rect x="106" y="336" width="188" height="92" rx="24" [attr.fill]="p().liquid" />
+      <rect x="106" y="336" width="188" height="92" rx="24" [attr.fill]="'url(#' + id + 'glass)'" />
+      <text x="200" y="390" text-anchor="middle" class="art-label" [attr.fill]="p().ink">{{ text() }}</text>
+    }
+    @case ('serum') {
+      <ellipse cx="200" cy="176" rx="24" ry="38" [attr.fill]="p().cap" />
+      <rect x="170" y="206" width="60" height="54" rx="8" [attr.fill]="'url(#' + id + 'metal)'" />
+      <rect x="146" y="256" width="108" height="170" rx="20" [attr.fill]="'url(#' + id + 'liq)'" />
+      <rect x="146" y="256" width="108" height="170" rx="20" [attr.fill]="'url(#' + id + 'glass)'" stroke="#fff" stroke-opacity=".6" />
+      <rect x="160" y="270" width="9" height="140" rx="4.5" fill="#fff" opacity=".45" />
+      <text x="200" y="352" text-anchor="middle" class="art-label" [attr.fill]="p().ink">{{ text() }}</text>
+    }
+    @case ('lipstick') {
+      <path d="M174 256v-74q0-22 26-40l26 22v92z" [attr.fill]="p().liquid" />
+      <path d="M174 256v-74q0-22 26-40" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="5" />
+      <rect x="166" y="250" width="68" height="62" rx="4" [attr.fill]="'url(#' + id + 'metal)'" />
+      <rect x="158" y="306" width="84" height="122" rx="8" [attr.fill]="p().cap" />
+      <rect x="168" y="314" width="8" height="104" rx="4" fill="#fff" opacity=".3" />
+      <text x="200" y="372" text-anchor="middle" class="art-label art-label--small" [attr.fill]="p().ink">{{ text() }}</text>
+    }
+  }
+</svg>

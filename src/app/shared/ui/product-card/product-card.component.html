@@ -1,0 +1,41 @@
+<article class="card">
+  <a class="card__link" [routerLink]="['/produtos', product().slug]" data-cursor="Ver">
+    <div class="card__media" tilt="6">
+      @if (product().image) {
+        <img [src]="product().image" [alt]="product().name" loading="lazy" />
+      } @else {
+        <app-product-art class="card__art" [kind]="product().art.kind" [tone]="product().art.tone" [label]="product().line" />
+      }
+
+      <div class="card__badges">
+        @if (discount()) {
+          <span class="badge">−{{ discount() }}%</span>
+        }
+        @if (product().stock <= 2) {
+          <span class="badge badge--soft">Últimas {{ product().stock }}</span>
+        }
+      </div>
+
+      <blockquote class="card__quote">
+        <span class="card__quote-mark" aria-hidden="true">“</span>{{ quote() }}
+      </blockquote>
+    </div>
+
+    <div class="card__info">
+      <span class="card__meta">{{ product().line }} · {{ category() }}</span>
+      <h3 class="card__name">{{ product().name }}</h3>
+      <p class="card__price">
+        @if (product().promoPrice) {
+          <s>{{ product().price | brl }}</s>
+          <strong>{{ product().promoPrice | brl }}</strong>
+        } @else {
+          <strong>{{ product().price | brl }}</strong>
+        }
+      </p>
+    </div>
+  </a>
+
+  <button type="button" class="card__add" (click)="add($event)" [attr.aria-label]="'Adicionar ' + product().name + ' à sacola'">
+    <app-icon name="plus" />
+  </button>
+</article>

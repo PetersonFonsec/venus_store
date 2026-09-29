@@ -1,0 +1,42 @@
+<footer class="footer" #root>
+  <div class="footer__inner" #inner>
+    <div class="container">
+      <div class="cta">
+        <h2 class="cta__title display" reveal="words">Ficou com <em>dúvida?</em><br />Me chama.</h2>
+        <a class="cta__btn" [href]="waLink" target="_blank" rel="noopener" magnetic="0.4">
+          <span data-magnetic-inner class="cta__btn-inner">
+            <app-icon name="whatsapp" />
+            Chamar no WhatsApp
+          </span>
+        </a>
+      </div>
+
+      <div class="cols">
+        <div class="col">
+          <span class="col__title">Navegue</span>
+          <a routerLink="/" class="link">Início</a>
+          <a routerLink="/produtos" class="link">Produtos</a>
+          <a routerLink="/produtos" [queryParams]="{ promo: 1 }" class="link">Promoções</a>
+          <a routerLink="/sobre" class="link">Sobre mim</a>
+        </div>
+        <div class="col">
+          <span class="col__title">Contato</span>
+          <a [href]="waLink" target="_blank" rel="noopener" class="link">WhatsApp</a>
+          <a [href]="'https://instagram.com/' + seller.instagram" target="_blank" rel="noopener" class="link">&#64;{{ seller.instagram }}</a>
+        </div>
+        <div class="col">
+          <span class="col__title">Onde estou</span>
+          <span>{{ seller.city }}</span>
+          <span class="col__time">{{ time() || '--:--' }} · horário local</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="wordmark script" aria-hidden="true">Vênus</p>
+
+    <div class="bottom container">
+      <small>© {{ year }} Use Vênus · Revendedora independente. O Boticário e suas linhas são marcas de seus respectivos titulares.</small>
+      <small>Feito com 💙 por um dev curioso.</small>
+    </div>
+  </div>
+</footer>

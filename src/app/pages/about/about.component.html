@@ -1,1 +1,98 @@
-<p>about works!</p>
+<!-- ============ HERO ============ -->
+<section class="hero container">
+  <div class="hero__text">
+    <p class="eyebrow" reveal [revealOnLoad]="true">Sobre mim</p>
+    <h1 class="hero__title display">
+      <span reveal="words" [revealOnLoad]="true">Oi, eu sou</span>
+      <span class="hero__name script" reveal="words" [revealOnLoad]="true" [revealDelay]="0.2">a {{ seller.name }}</span>
+    </h1>
+    <p class="lead" reveal [revealOnLoad]="true" [revealDelay]="0.3">{{ seller.role }} desde {{ seller.since }}, em {{ seller.city }}.</p>
+  </div>
+
+  <div class="hero__portrait" reveal="clip" [revealOnLoad]="true" [revealDelay]="0.15">
+    <!-- Troque por uma foto dela (Prismic: seller.photo) -->
+    <div class="portrait" parallax="-8">
+      <span class="portrait__initial script">{{ seller.name.charAt(0) }}</span>
+    </div>
+  </div>
+  <app-stamp class="hero__stamp" text="Opinião sincera • Atendimento de amiga • " />
+</section>
+
+<!-- ============ HISTÓRIA ============ -->
+<section class="story section container">
+  <p class="story__lead display" reveal="scrub">{{ seller.bio[0] }}</p>
+  <div class="story__cols">
+    @for (paragraph of seller.bio.slice(1); track $index) {
+      <p reveal [revealDelay]="$index * 0.1">{{ paragraph }}</p>
+    }
+  </div>
+</section>
+
+<!-- ============ NÚMEROS ============ -->
+<section class="stats container" #stats>
+  @for (s of seller.stats; track s.label; let i = $index) {
+    <div class="stat" reveal [revealDelay]="i * 0.08">
+      <span class="stat__value display"><span [attr.data-count]="s.value">0</span>{{ s.suffix }}</span>
+      <span class="stat__label">{{ s.label }}</span>
+    </div>
+  }
+</section>
+
+<!-- ============ VALORES ============ -->
+<section class="values section container">
+  <header class="values__head">
+    <p class="eyebrow" reveal>Como eu trabalho</p>
+    <h2 class="display h2" reveal="words">O que você pode <em>esperar</em></h2>
+  </header>
+  <ol class="values__list">
+    @for (v of seller.values; track v.title; let i = $index) {
+      <li class="value" reveal [revealDelay]="i * 0.08">
+        <span class="value__num">0{{ i + 1 }}</span>
+        <h3 class="h3">{{ v.title }}</h3>
+        <p>{{ v.text }}</p>
+      </li>
+    }
+  </ol>
+</section>
+
+<!-- ============ QUERIDINHOS (lista com preview no cursor) ============ -->
+<section class="favs section">
+  <div class="container">
+    <header class="favs__head">
+      <p class="eyebrow eyebrow--light" reveal>Nota 5 de 5</p>
+      <h2 class="display h2" reveal="words">Meus <em>queridinhos</em></h2>
+    </header>
+
+    <ul class="favs__list" #list (pointerleave)="hovered.set(null)">
+      @for (p of favorites; track p.slug) {
+        <li>
+          <a class="fav-row" [routerLink]="['/produtos', p.slug]" (pointerenter)="hovered.set(p)">
+            <span class="fav-row__name display">{{ p.name }}</span>
+            <span class="fav-row__meta">{{ catalog.categoryLabel(p.category) }}</span>
+            <app-icon class="fav-row__arrow" name="arrow-up-right" />
+          </a>
+        </li>
+      }
+
+      <div class="favs__preview" #preview [class.is-visible]="hovered()" aria-hidden="true">
+        <div class="favs__preview-card">
+          @if (hovered(); as h) {
+            <app-product-art [kind]="h.art.kind" [tone]="h.art.tone" [label]="h.line" />
+          }
+        </div>
+      </div>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta section container">
+  <h2 class="display h1" reveal="words">Não sabe o que <em>escolher?</em></h2>
+  <p class="lead" reveal [revealDelay]="0.1">Me conta pra quem é, a ocasião e o que a pessoa gosta. Eu te indico o presente certo.</p>
+  <div class="cta__actions" reveal [revealDelay]="0.2">
+    <a class="btn btn--wa" [href]="waLink" target="_blank" rel="noopener" magnetic="0.2">
+      <app-icon name="whatsapp" /><span data-magnetic-inner>Pedir uma indicação</span>
+    </a>
+    <a routerLink="/produtos" class="btn btn--ghost">Ver produtos</a>
+  </div>
+</section>

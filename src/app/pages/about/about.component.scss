@@ -1,0 +1,277 @@
+$md: 900px;
+
+.hero {
+  position: relative;
+  display: grid;
+  gap: 2.5rem;
+  align-items: end;
+  padding-top: calc(var(--header-h) + clamp(2rem, 6vw, 5rem));
+  padding-bottom: clamp(3rem, 6vw, 6rem);
+
+  @media (min-width: $md) {
+    grid-template-columns: 1.3fr 1fr;
+  }
+}
+
+.hero__text {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.hero__title {
+  display: grid;
+  font-size: var(--fs-3xl);
+}
+
+.hero__name {
+  font-size: 1.35em;
+  line-height: 1.1;
+  color: var(--cobalt);
+  letter-spacing: 0;
+}
+
+.hero__portrait {
+  border-radius: 999px 999px var(--radius-card) var(--radius-card);
+  overflow: hidden;
+}
+
+.hero__stamp {
+  position: absolute;
+  --size: clamp(110px, 12vw, 170px);
+  right: calc(var(--gutter) + 2%);
+  bottom: 2rem;
+
+  @media (min-width: $md) {
+    right: auto;
+    left: 52%;
+    bottom: 18%;
+  }
+}
+
+.portrait {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 5;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(170, 207, 253, 0.9), transparent 45%),
+    linear-gradient(160deg, var(--cobalt-bright), var(--cobalt) 55%, #00307a);
+  transform: scale(1.12);
+
+  &__initial {
+    font-size: clamp(10rem, 26vw, 24rem);
+    line-height: 1;
+    color: var(--paper);
+  }
+}
+
+.story {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4rem);
+}
+
+.story__lead {
+  max-width: 22ch;
+  font-size: clamp(2rem, 1rem + 3.6vw, 4.75rem);
+  line-height: 1.05;
+}
+
+.story__cols {
+  display: grid;
+  gap: 1.5rem 4rem;
+  max-width: 60rem;
+  margin-left: auto;
+  font-size: var(--fs-lg);
+  color: var(--ink-soft);
+
+  @media (min-width: $md) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.stats {
+  display: grid;
+  border-block: 1px solid var(--line);
+
+  @media (min-width: $md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.stat {
+  display: grid;
+  gap: 0.5rem;
+  padding-block: clamp(2rem, 4vw, 3.5rem);
+
+  & + & {
+    border-top: 1px solid var(--line);
+
+    @media (min-width: $md) {
+      border-top: 0;
+      border-left: 1px solid var(--line);
+      padding-left: 2rem;
+    }
+  }
+
+  &__value {
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    color: var(--cobalt);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__label {
+    color: var(--ink-soft);
+  }
+}
+
+.values__head {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.values__list {
+  display: grid;
+  list-style: none;
+}
+
+.value {
+  display: grid;
+  gap: 0.5rem 2rem;
+  padding-block: 2rem;
+  border-top: 1px solid var(--line);
+
+  @media (min-width: $md) {
+    grid-template-columns: 6rem 1fr 1.2fr;
+    align-items: baseline;
+  }
+
+  &__num {
+    font-size: var(--fs-sm);
+    color: var(--cobalt);
+    font-weight: 600;
+  }
+
+  p {
+    color: var(--ink-soft);
+  }
+}
+
+/* ---------- Queridinhos ---------- */
+
+.favs {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: clamp(24px, 4vw, 48px);
+  margin-inline: clamp(0.5rem, 1vw, 1rem);
+
+  .display em {
+    color: var(--sky);
+  }
+}
+
+.eyebrow--light {
+  color: rgba(244, 240, 232, 0.7);
+
+  &::before {
+    background: var(--sky);
+  }
+}
+
+.favs__head {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.favs__list {
+  position: relative;
+}
+
+.fav-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 1.5rem;
+  padding-block: clamp(1.25rem, 2.5vw, 2rem);
+  border-top: 1px solid rgba(244, 240, 232, 0.18);
+  transition:
+    padding 0.6s var(--ease-out),
+    opacity 0.4s;
+
+  &__name {
+    font-size: clamp(1.75rem, 1rem + 2.6vw, 3.5rem);
+  }
+
+  &__meta {
+    font-size: var(--fs-sm);
+    opacity: 0.6;
+  }
+
+  &__arrow {
+    font-size: 1.5rem;
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  @media (hover: hover) {
+    .favs__list:hover & {
+      opacity: 0.35;
+    }
+
+    &:hover {
+      opacity: 1 !important;
+      padding-left: 1.5rem;
+
+      .fav-row__arrow {
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+// O wrapper é movido pelo GSAP (x/y); o card interno centraliza e anima a entrada.
+.favs__preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+
+  @media not (pointer: fine) {
+    display: none;
+  }
+}
+
+.favs__preview-card {
+  width: clamp(180px, 18vw, 260px);
+  padding: 12% 8% 0;
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  overflow: hidden;
+  opacity: 0;
+  transform: translate(-50%, -55%) scale(0.6);
+  transition:
+    opacity 0.4s,
+    transform 0.6s var(--ease-out);
+
+  .is-visible & {
+    opacity: 1;
+    transform: translate(-50%, -55%) scale(1);
+  }
+}
+
+/* ---------- CTA ---------- */
+
+.cta {
+  display: grid;
+  gap: 1.75rem;
+  justify-items: center;
+  text-align: center;
+
+  .lead {
+    max-width: 40ch;
+  }
+}
+
+.cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
