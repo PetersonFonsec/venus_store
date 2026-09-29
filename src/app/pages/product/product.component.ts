@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, input, linkedSignal } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { BagService } from '../../core/services/bag.service';
@@ -45,18 +44,6 @@ export class ProductComponent {
   protected readonly current = computed(() => (this.product() ? [this.product()!] : []));
   protected readonly related = computed(() => (this.product() ? this.catalog.related(this.product()!) : []));
   protected readonly qty = linkedSignal({ source: this.slug, computation: () => 1 });
-
-  constructor() {
-    const title = inject(Title);
-    const meta = inject(Meta);
-    effect(() => {
-      const p = this.product();
-      if (!p) return;
-      title.setTitle(`${p.name} · Use Vênus`);
-      meta.updateTag({ name: 'description', content: `${p.review.text.slice(0, 150)}…` });
-      meta.updateTag({ property: 'og:title', content: `${p.name} · Use Vênus` });
-    });
-  }
 
   protected step(delta: number): void {
     const p = this.product();

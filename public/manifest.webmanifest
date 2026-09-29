@@ -1,8 +1,10 @@
 {
-  "name": "Venus Store",
-  "short_name": "Venus",
+  "name": "Use Vênus",
+  "short_name": "Use Vênus",
+  "description": "Perfumes, cuidados e maquiagem O Boticário escolhidos a dedo.",
+  "lang": "pt-BR",
   "display": "standalone",
-  "theme_color": "#004CAB",
+  "theme_color": "#F4F0E8",
   "background_color": "#F4F0E8",
   "scope": "./",
   "start_url": "./",
