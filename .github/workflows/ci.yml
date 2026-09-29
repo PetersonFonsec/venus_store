@@ -51,8 +51,6 @@ jobs:
   audit:
     name: Auditoria de dependências
     runs-on: ubuntu-latest
-    # Não bloqueia o merge enquanto as vulnerabilidades já conhecidas do Angular 19 não forem corrigidas.
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 
