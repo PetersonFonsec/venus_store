@@ -334,7 +334,9 @@ $md: 900px;
   }
 
   &__body {
-    display: grid;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
     gap: 0.2rem;
     padding: 1rem 0.5rem 0.4rem;
   }
@@ -357,7 +359,9 @@ $md: 900px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 0.5rem;
+    // Empurra preço + botão para o rodapé, alinhando os cards mesmo com títulos de 2 linhas.
+    margin-top: auto;
+    padding-top: 0.5rem;
   }
 
   &__price {
