@@ -1,16 +1,16 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
 
-import { PRODUCTS } from './core/data/catalog.mock';
+import { CATALOG } from './core/data/catalog';
 
 /**
  * Tudo é gerado estaticamente no build (JAMStack).
- * Com o Prismic, getPrerenderParams passa a buscar os slugs na API.
+ * Os slugs vêm do conteúdo baixado do Prismic antes do build.
  */
 export const serverRoutes: ServerRoute[] = [
   {
     path: 'produtos/:slug',
     renderMode: RenderMode.Prerender,
-    getPrerenderParams: async () => PRODUCTS.map((p) => ({ slug: p.slug })),
+    getPrerenderParams: async () => CATALOG.products.map((p) => ({ slug: p.slug })),
   },
   { path: '**', renderMode: RenderMode.Prerender },
 ];

@@ -7,14 +7,16 @@ const DIST = 'dist/venus-store';
 const BROWSER = join(DIST, 'browser');
 const STATIC_ROUTES = ['/', '/produtos', '/sobre'];
 
-// Com o Prismic, os slugs passam a vir da API e esta leitura precisa mudar.
-const catalog = readFileSync('src/app/core/data/catalog.mock.ts', 'utf8');
-const slugs = [...catalog.matchAll(/slug:\s*'([^']+)'/g)].map((m) => m[1]);
+// Slugs do conteúdo do Prismic (catalog.content.json) ou, sem ele, do mock.
+const content = JSON.parse(readFileSync('src/app/core/data/catalog.content.json', 'utf8'));
+const slugs = content
+  ? content.products.map((p) => p.slug)
+  : [...readFileSync('src/app/core/data/catalog.mock.ts', 'utf8').matchAll(/slug:\s*'([^']+)'/g)].map((m) => m[1]);
 
 const errors = [];
 const fail = (msg) => errors.push(msg);
 
-if (slugs.length === 0) fail('Nenhum slug encontrado em catalog.mock.ts');
+if (slugs.length === 0) fail('Nenhum slug de produto encontrado');
 
 const manifestPath = join(DIST, 'prerendered-routes.json');
 const prerendered = existsSync(manifestPath)

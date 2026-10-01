@@ -10,9 +10,12 @@
   </div>
 
   <div class="hero__portrait" reveal="clip" [revealOnLoad]="true" [revealDelay]="0.15">
-    <!-- Troque por uma foto dela (Prismic: seller.photo) -->
     <div class="portrait" parallax="-8">
-      <span class="portrait__initial script">{{ seller.name.charAt(0) }}</span>
+      @if (seller.photo) {
+        <img class="portrait__photo" [src]="seller.photo" [alt]="seller.name" loading="lazy" />
+      } @else {
+        <span class="portrait__initial script">{{ seller.name.charAt(0) }}</span>
+      }
     </div>
   </div>
   <app-stamp class="hero__stamp" text="Opinião sincera • Atendimento de amiga • " />

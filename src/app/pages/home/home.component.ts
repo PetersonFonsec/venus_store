@@ -45,7 +45,12 @@ export class HomeComponent {
   protected readonly seller = this.catalog.seller;
   protected readonly promos = this.catalog.promos();
   protected readonly featured = this.catalog.featured();
-  protected readonly heroArts = [this.catalog.bySlug('lily-eau-de-parfum')!, this.catalog.bySlug('floratta-blue')!, this.catalog.bySlug('botik-vitamina-c')!];
+  /** Três produtos flutuando no hero: o favorito e, de preferência, ilustrações diferentes. */
+  protected readonly heroArts = (() => {
+    const ordered = [this.featured, ...this.catalog.products.filter((p) => p !== this.featured)];
+    const oneEach = ordered.filter((p, i) => ordered.findIndex((q) => q.art.kind === p.art.kind) === i);
+    return [...new Set([...oneEach, ...ordered])].slice(0, 3);
+  })();
 
   protected readonly filter = signal<CategoryId | 'all'>('all');
   protected readonly shelf = computed(() => {
