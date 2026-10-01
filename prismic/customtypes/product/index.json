@@ -1,0 +1,210 @@
+{
+  "id": "product",
+  "label": "Produto",
+  "repeatable": true,
+  "status": true,
+  "format": "custom",
+  "json": {
+    "Principal": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "Slug (URL do produto)"
+        }
+      },
+      "name": {
+        "type": "Text",
+        "config": {
+          "label": "Nome",
+          "placeholder": "Lily Eau de Parfum"
+        }
+      },
+      "line": {
+        "type": "Text",
+        "config": {
+          "label": "Linha",
+          "placeholder": "Lily"
+        }
+      },
+      "category": {
+        "type": "Link",
+        "config": {
+          "label": "Categoria",
+          "select": "document",
+          "customtypes": [
+            "category"
+          ]
+        }
+      },
+      "size": {
+        "type": "Text",
+        "config": {
+          "label": "Tamanho",
+          "placeholder": "75 ml"
+        }
+      },
+      "price": {
+        "type": "Number",
+        "config": {
+          "label": "Preço (R$)",
+          "placeholder": "389.90"
+        }
+      },
+      "promo_price": {
+        "type": "Number",
+        "config": {
+          "label": "Preço promocional (R$, deixe vazio se não estiver em promoção)",
+          "placeholder": "299.90"
+        }
+      },
+      "stock": {
+        "type": "Number",
+        "config": {
+          "label": "Estoque",
+          "placeholder": "3"
+        }
+      },
+      "featured": {
+        "type": "Boolean",
+        "config": {
+          "label": "Meu favorito (marque só um)",
+          "default_value": false
+        }
+      },
+      "image": {
+        "type": "Image",
+        "config": {
+          "label": "Foto (vazia = usa a ilustração)",
+          "constraint": {
+            "width": 1200,
+            "height": 1500
+          },
+          "thumbnails": []
+        }
+      },
+      "description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Descrição",
+          "multi": "paragraph"
+        }
+      },
+      "how_to_use": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Como usar",
+          "multi": "paragraph"
+        }
+      }
+    },
+    "Notas olfativas": {
+      "notes_top": {
+        "type": "Text",
+        "config": {
+          "label": "Notas de topo (separadas por vírgula)",
+          "placeholder": "Bergamota, Mandarina"
+        }
+      },
+      "notes_heart": {
+        "type": "Text",
+        "config": {
+          "label": "Notas de coração (separadas por vírgula)",
+          "placeholder": "Lírio, Jasmim"
+        }
+      },
+      "notes_base": {
+        "type": "Text",
+        "config": {
+          "label": "Notas de fundo (separadas por vírgula)",
+          "placeholder": "Baunilha, Almíscar"
+        }
+      }
+    },
+    "Opinião": {
+      "review_text": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Minha opinião",
+          "multi": "paragraph"
+        }
+      },
+      "rating": {
+        "type": "Select",
+        "config": {
+          "label": "Nota",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "default_value": "5"
+        }
+      },
+      "best_for": {
+        "type": "Text",
+        "config": {
+          "label": "Ideal para",
+          "placeholder": "Noite, eventos e presente certeiro"
+        }
+      },
+      "highlights": {
+        "type": "Group",
+        "config": {
+          "label": "Destaques",
+          "repeat": true,
+          "fields": {
+            "highlight": {
+              "type": "Text",
+              "config": {
+                "label": "Destaque",
+                "placeholder": "Fixação de 10h+"
+              }
+            }
+          }
+        }
+      },
+      "tip": {
+        "type": "Text",
+        "config": {
+          "label": "Dica (opcional)",
+          "placeholder": "Duas borrifadas bastam."
+        }
+      }
+    },
+    "Ilustração": {
+      "art_kind": {
+        "type": "Select",
+        "config": {
+          "label": "Formato da ilustração",
+          "options": [
+            "perfume",
+            "colonia",
+            "lotion",
+            "cream",
+            "serum",
+            "lipstick"
+          ],
+          "default_value": "perfume"
+        }
+      },
+      "art_tone": {
+        "type": "Select",
+        "config": {
+          "label": "Cor da ilustração",
+          "options": [
+            "cobalt",
+            "rose",
+            "amber",
+            "sage",
+            "plum",
+            "ink",
+            "sand"
+          ],
+          "default_value": "cobalt"
+        }
+      }
+    }
+  }
+}
