@@ -1,0 +1,31 @@
+{
+  "id": "category",
+  "label": "Categoria",
+  "repeatable": true,
+  "status": true,
+  "format": "custom",
+  "json": {
+    "Principal": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "ID (perfumaria, corpo-e-banho, skincare, maquiagem)"
+        }
+      },
+      "label": {
+        "type": "Text",
+        "config": {
+          "label": "Nome",
+          "placeholder": "Corpo & Banho"
+        }
+      },
+      "order": {
+        "type": "Number",
+        "config": {
+          "label": "Ordem nos filtros",
+          "placeholder": "1"
+        }
+      }
+    }
+  }
+}

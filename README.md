@@ -36,7 +36,11 @@ npm run build      # gera o site estático
 
 ## Próximos passos (Prismic)
 
-1. Criar os custom types `product` e `seller` seguindo `product.model.ts`.
+1. Criar os custom types no Prismic. Os modelos `seller`, `category` e `product` estão em `prismic/customtypes/` (formato do Slice Machine). Para enviar, gere um token em *Settings > API & Security > Write APIs > Custom Types API* e rode:
+   ```bash
+   PRISMIC_REPO=nome-do-repositorio PRISMIC_WRITE_TOKEN=seu-token npm run prismic:push
+   ```
+   O script cria os tipos que ainda não existem e atualiza os que já existem.
 2. Trocar a origem de dados do `CatalogService` e o `getPrerenderParams` para ler a API no build.
 3. Webhook do Prismic → Deploy Hook da Vercel, para publicar quando ela salvar um produto.
 4. Com fotos reais, preencher `image` no produto — o card e a página já trocam a ilustração pela foto.

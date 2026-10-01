@@ -1,0 +1,127 @@
+{
+  "id": "seller",
+  "label": "Vendedora",
+  "repeatable": false,
+  "status": true,
+  "format": "custom",
+  "json": {
+    "Principal": {
+      "name": {
+        "type": "Text",
+        "config": {
+          "label": "Nome",
+          "placeholder": "Ana"
+        }
+      },
+      "role": {
+        "type": "Text",
+        "config": {
+          "label": "Cargo",
+          "placeholder": "Consultora de beleza O Boticário"
+        }
+      },
+      "city": {
+        "type": "Text",
+        "config": {
+          "label": "Cidade",
+          "placeholder": "São Paulo, SP"
+        }
+      },
+      "whatsapp": {
+        "type": "Text",
+        "config": {
+          "label": "WhatsApp (só números, com DDI)",
+          "placeholder": "5511999999999"
+        }
+      },
+      "instagram": {
+        "type": "Text",
+        "config": {
+          "label": "Instagram (sem @)",
+          "placeholder": "usevenusstore"
+        }
+      },
+      "since": {
+        "type": "Number",
+        "config": {
+          "label": "Consultora desde (ano)",
+          "placeholder": "2019"
+        }
+      },
+      "photo": {
+        "type": "Image",
+        "config": {
+          "label": "Foto",
+          "constraint": {
+            "width": 900,
+            "height": 1200
+          },
+          "thumbnails": []
+        }
+      },
+      "bio": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Bio (um parágrafo por bloco: o 1º é o destaque do Sobre, o 2º aparece na Home)",
+          "multi": "paragraph"
+        }
+      }
+    },
+    "Números": {
+      "stats": {
+        "type": "Group",
+        "config": {
+          "label": "Números",
+          "repeat": true,
+          "fields": {
+            "value": {
+              "type": "Number",
+              "config": {
+                "label": "Valor",
+                "placeholder": "1200"
+              }
+            },
+            "suffix": {
+              "type": "Text",
+              "config": {
+                "label": "Sufixo",
+                "placeholder": "+"
+              }
+            },
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "Legenda",
+                "placeholder": "pedidos entregues"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Valores": {
+      "values": {
+        "type": "Group",
+        "config": {
+          "label": "Como eu trabalho",
+          "repeat": true,
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": {
+                "label": "Título",
+                "placeholder": "Opinião sincera"
+              }
+            },
+            "text": {
+              "type": "Text",
+              "config": {
+                "label": "Texto"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
