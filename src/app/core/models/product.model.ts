@@ -1,10 +1,11 @@
 /**
  * Formato dos dados que o site consome.
- * Pensado para mapear 1:1 com os custom types do Prismic (product, seller)
- * — quando o CMS entrar, basta trocar a origem no CatalogService.
+ * Mapeia os custom types do Prismic (seller, category, product); a conversão
+ * fica em scripts/prismic-fetch-content.mjs.
  */
 
-export type CategoryId = 'perfumaria' | 'corpo-e-banho' | 'skincare' | 'maquiagem';
+/** UID do documento `category` no Prismic (perfumaria, corpo-e-banho...). */
+export type CategoryId = string;
 
 export interface Category {
   id: CategoryId;
@@ -59,7 +60,15 @@ export interface Seller {
   whatsapp: string;
   instagram: string;
   since: number;
+  /** Foto (Prismic). Se ausente, mostra a inicial do nome. */
+  photo?: string;
   bio: string[];
   stats: { value: number; suffix?: string; label: string }[];
   values: { title: string; text: string }[];
+}
+
+export interface CatalogContent {
+  seller: Seller;
+  categories: Category[];
+  products: Product[];
 }

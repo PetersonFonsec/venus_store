@@ -34,13 +34,27 @@ npm run build      # gera o site estático
 - `data-cursor="Ver"` — o cursor vira um círculo com o texto ao passar por cima.
 - Tudo respeita `prefers-reduced-motion`; cursor customizado só aparece com mouse.
 
-## Próximos passos (Prismic)
+## Conteúdo (Prismic)
 
-1. Criar os custom types no Prismic. Os modelos `seller`, `category` e `product` estão em `prismic/customtypes/` (formato do Slice Machine). Para enviar, gere um token em *Settings > API & Security > Write APIs > Custom Types API* e rode:
-   ```bash
-   PRISMIC_REPO=nome-do-repositorio PRISMIC_WRITE_TOKEN=seu-token npm run prismic:push
-   ```
-   O script cria os tipos que ainda não existem e atualiza os que já existem.
-2. Trocar a origem de dados do `CatalogService` e o `getPrerenderParams` para ler a API no build.
-3. Webhook do Prismic → Deploy Hook da Vercel, para publicar quando ela salvar um produto.
-4. Com fotos reais, preencher `image` no produto — o card e a página já trocam a ilustração pela foto.
+O conteúdo vem do repositório Prismic `kntukai1` e é baixado **no build** por `scripts/prismic-fetch-content.mjs`, que grava `src/app/core/data/catalog.content.json`. Os scripts `prebuild`, `prestart` e `pretest` rodam isso automaticamente.
+
+| Variável | Para quê |
+| --- | --- |
+| `PRISMIC_REPO` | Nome do repositório (`kntukai1`). Sem ela, o site usa o `catalog.mock.ts`. |
+| `PRISMIC_ACCESS_TOKEN` | Opcional, só se a Content API do repositório for privada. |
+
+- Sem vendedora ou sem produtos publicados no Prismic, o build usa o mock e avisa no log.
+- Com `PRISMIC_REPO` definido e a API fora do ar, o build falha, para nunca publicar o mock no lugar do conteúdo real.
+- `catalog.content.json` fica versionado como `null`. Não faça commit dele com conteúdo.
+
+### Modelos
+
+Os custom types `seller`, `category` e `product` estão em `prismic/customtypes/`. Para enviar alterações, gere um token em *Settings > API & Security > Write APIs > Custom Types API* e rode:
+```bash
+PRISMIC_REPO=kntukai1 PRISMIC_WRITE_TOKEN=seu-token npm run prismic:push
+```
+
+### Próximos passos
+
+1. Na Vercel: definir `PRISMIC_REPO=kntukai1` e usar `npm run build` como Build Command.
+2. Webhook do Prismic → Deploy Hook da Vercel, para publicar quando ela salvar um produto.
