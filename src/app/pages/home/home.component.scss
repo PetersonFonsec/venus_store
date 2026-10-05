@@ -583,6 +583,14 @@ $md: 900px;
     color: var(--paper);
   }
 
+  &__photo {
+    grid-area: 1 / 1;
+    place-self: stretch;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   &__stamp {
     position: absolute;
     right: 10%;

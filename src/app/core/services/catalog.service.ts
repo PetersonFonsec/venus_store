@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import { CATEGORIES, PRODUCTS, SELLER } from '../data/catalog.mock';
+import { CATALOG } from '../data/catalog';
 import { CategoryId, Product } from '../models/product.model';
 
 /**
- * Única porta de entrada para o conteúdo.
- * Hoje lê o mock; depois, os mesmos métodos passam a ler o Prismic no build.
+ * Única porta de entrada para o conteúdo (Prismic no build, ou o mock sem ele).
  */
 @Injectable({ providedIn: 'root' })
 export class CatalogService {
-  readonly seller = SELLER;
-  readonly categories = CATEGORIES;
-  readonly products = PRODUCTS;
+  readonly seller = CATALOG.seller;
+  readonly categories = CATALOG.categories;
+  readonly products = CATALOG.products;
 
   bySlug(slug: string): Product | undefined {
     return this.products.find((p) => p.slug === slug);
